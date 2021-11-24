@@ -12,5 +12,6 @@ int main(void) {
 
 	printf("Je suis le processus numéro : %d %s %d \n", getpid(), ", et mon père est le processus numéro", getppid());
 	
+	
 	return 0;
 }
