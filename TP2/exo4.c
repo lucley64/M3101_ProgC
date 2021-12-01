@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <pthread.h>
+
+void thread1(){
+	while(1){
+		printf(".\n");
+		sleep(1);
+	}
+	pthread_exit(NULL);
+}
+
+void thread2(){
+	printf("tapez un charactère : \n");
+	char i;
+	scanf("%c", &i);
+	pthread_exit(&i);
+}
+
+int main(void){
+        pthread_attr_t attr;
+        pthread_t id1, id2;
+
+        pthread_attr_init(&attr);
+
+	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
+
+        pthread_create(&id1, &attr, (void*)thread1, NULL);
+        pthread_create(&id2, &attr, (void*)thread2, NULL);
+
+        printf("Les threads sont lancés \n");
+
+	pthread_join(id2, NULL);
+
+	printf("On va s'arrêter là \n");
+
+        exit(0);
+}
+
