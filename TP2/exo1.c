@@ -26,8 +26,7 @@ int main(void){
         pthread_create(&id1, &attr, (void*)thread1, NULL);
         pthread_create(&id2, &attr, (void*)thread2, NULL);
 
-        pthread_join(id1, NULL);
-        pthread_join(id2, NULL);
+        printf("les threads sont lancés");
 
         exit(0);
 }
