@@ -7,7 +7,7 @@
 unsigned long cpt = 0;
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
-void compteur(){
+void* compteur(void* ptr){
     for (int i=0; i <10000000; i++){
         pthread_mutex_lock(&mutex);
         unsigned long tmp = cpt;
@@ -29,8 +29,8 @@ int main(){
     pthread_t id1, id2;
 
     pthread_attr_init(&attr);
-    pthread_create(&id1, &attr, (void*)compteur, NULL);
-    pthread_create(&id2, &attr, (void*)compteur, NULL);
+    pthread_create(&id1, &attr, &compteur, NULL);
+    pthread_create(&id2, &attr, &compteur, NULL);
 
     printf("Les threads sont lances \n");
 
